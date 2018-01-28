@@ -22,8 +22,9 @@ function setup() {
     acc = createVector(0, 1);
 
     // Player sprite
-    player = createSprite(width / 2, height / 2, 40, 40);
-    player.shapeColor = color(123, 52, 123);
+    var img = loadImage("assets/hero.png");
+    player = createSprite(width / 2, height / 2, 20, 20);
+    player.addImage(img);
     player.position = pos;
     player.restitution = 0.3;
 
