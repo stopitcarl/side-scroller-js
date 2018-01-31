@@ -4,6 +4,8 @@ var pos;
 var vel;
 var acc;
 var MAXJUMPS = 2;
+var GRAVITY = 0.4
+var JUMP = 12;
 var jumps = 0;
 
 // world
@@ -13,13 +15,13 @@ var map;
 
 function setup() {
     createCanvas(displayWidth * 0.6, displayHeight * 0.6);
-    frameRate(30);
+    frameRate(40);
 
     // Player physics
     pos = createVector(width / 3, height / 2);
     vel = createVector(0, 0);
     vel.limit(2);
-    acc = createVector(0, 1);
+    acc = createVector(0, GRAVITY);
 
     // Player sprite
     var img = loadImage("assets/hero.png");
@@ -71,7 +73,7 @@ function update() {
     pos.add(vel);
 
     vel.x = vel.x * 0.7;
-    acc.set(0, 1);
+
 
     if (player.overlap(map)) {
         vel.y = 0;
