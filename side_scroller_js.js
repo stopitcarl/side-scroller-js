@@ -1,21 +1,22 @@
 // player
 var player;
+var player_anim;
 var pos;
 var vel;
 var acc;
 var MAXJUMPS = 2;
-var GRAVITY = 0.4
+var GRAVITY = 0.8;
 var JUMP = 12;
 var jumps = 0;
 
 // world
 var platform;
-var map;
+
 
 
 function setup() {
-    createCanvas(displayWidth * 0.6, displayHeight * 0.6);
-    frameRate(40);
+    createCanvas(displayWidth * 0.7, displayHeight * 0.7);
+    frameRate(60);
 
     // Player physics
     pos = createVector(width / 3, height / 2);
@@ -25,7 +26,8 @@ function setup() {
 
     // Player sprite
     var img = loadImage("assets/hero.png");
-    player = createSprite(width / 2, height / 2, 20, 20);
+    player = createSprite(100, 100, 20, 20);
+    //var myAnimation = player.addAnimation("walking", "assets/Right.png", "assets/Right2.png");
     player.addImage(img);
     player.position = pos;
     player.restitution = 0.3;
@@ -43,19 +45,17 @@ function setup() {
     map = Group();
     map.add(ground);
     map.add(s);
-    map.add(d); // hello, u see dis? write here or qualquer sitio, ok fixe. se fizeres ctrl-s o que acontece? (save the file)idk n fez nada obvio
+    map.add(d);
+    // hello, u see dis? write here or qualquer sitio, ok fixe. se fizeres ctrl-s o que acontece? (save the file)idk n fez nada obvio
     // mas consegues tipo guardar o ficheiro? yuppp
     /* Já agora, ha outra maneira de escrever comments
     	com varias
     	linhas
 		queres um walktrough bueda basico e simples do codigo até agora? yupppppp
     */
-
-
 }
 
 function draw() {
-
     // Update game state
     readKeys();
     update();
@@ -71,9 +71,7 @@ function update() {
     // Update player's location
     vel.add(acc);
     pos.add(vel);
-
     vel.x = vel.x * 0.7;
-
 
     if (player.overlap(map)) {
         vel.y = 0;
